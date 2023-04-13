@@ -1,12 +1,11 @@
-#include "Window.h"
-
 #include <cstdio>
 #include <cstdlib>
+
+#include "Window.h"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
-
 
 static void error_callback(int error, const char* description) {
   fprintf(stderr, "Error: %s\n", description);
@@ -19,9 +18,10 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action,
     glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
 
-struct _Window {
+class _Window {
   GLFWwindow* window;
 
+ public:
   void init() {
     if (!glfwInit()) {
       exit(1);
@@ -32,6 +32,7 @@ struct _Window {
     window = glfwCreateWindow(640, 480, "PIG", NULL, NULL);
     if (!window) {
       // Window or OpenGL context creation failed
+      exit(1);
     }
     glfwSetKeyCallback(window, key_callback);
 
@@ -60,6 +61,7 @@ struct _Window {
 //
 //
 //
+Window::Window() { implementation = new _Window(); }
 void Window::init() { implementation->init(); }
 void Window::step() { implementation->step(); }
 void Window::halt() { implementation->halt(); }

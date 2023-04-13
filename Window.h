@@ -5,6 +5,7 @@ class Window {
   _Window* implementation;
 
  public:
+  Window();
   void init();
   void step();
   void halt();
