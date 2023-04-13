@@ -1,9 +1,9 @@
 .SUFFIXES:
 
-_: bar.bin
+_: main.bin
 
-bar.o: bar.cpp
-	c++ -std=c++14 -c bar.cpp -o bar.o -Iglad/include
+main.o: main.cpp
+	c++ -std=c++14 -c main.cpp -o main.o -Iglad/include
 
 glad.o: glad/src/glad.c
 	cc -c glad/src/glad.c -o glad.o -Iglad/include
@@ -11,8 +11,8 @@ glad.o: glad/src/glad.c
 window.o: Window.h Desktop.cpp
 	cc -c Desktop.cpp -o window.o -I/opt/homebrew/include -Iglad/include
 
-bar.bin: bar.o glad.o window.o
-	c++ -std=c++14 bar.o glad.o window.o -o bar.bin -L/opt/homebrew/lib -lglfw
+main.bin: main.o glad.o window.o
+	c++ -std=c++14 main.o glad.o window.o -o main.bin -L/opt/homebrew/lib -lglfw
 
 clean:
-	rm -f bar.o bar.bin
+	rm -f main.o main.bin
