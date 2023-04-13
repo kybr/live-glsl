@@ -11,6 +11,10 @@ glad.o: glad/src/glad.c
 window.o: Window.h Desktop.cpp
 	c++ -std=c++14 -g -c Desktop.cpp -o window.o -I/opt/homebrew/include -Iglad/include
 
+# on the Pi, use the Pi backend...
+#window.o: Window.h Raspberry.cpp
+#	c++ -std=c++14 -g -c Raspberry.cpp -o window.o -I/opt/homebrew/include -Iglad/include
+
 main.bin: main.o glad.o window.o
 	c++ -std=c++14 -g main.o glad.o window.o -o main.bin -L/opt/homebrew/lib -lglfw -llo
 
